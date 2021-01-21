@@ -4,8 +4,7 @@
     <WordBox v-bind:words="words" />
     <div>
         <input type="text" @input="handleKeyPress" v-model="userInput">
-        <p>current word: {{currentWord}}</p> 
-        <p>{{wordIndex}}</p>
+        <p>word index: {{wordIndex}}</p>
     </div>
 </div>
 
@@ -22,22 +21,25 @@ export default {
     },
     data(){
         return{
-            words: this.getWordsWithClasses(),
             userInput: '',
             currentWordIndex: 0,
-            currentWord: this.getWords()[0],
+            words: this.getWordsWithClasses(),
         }
     },
     methods: {
-        getWords(){
-            return json[0].words;
-        },
         getWordsWithClasses(){
-            const words = this.getWords();
+            const wordSet = json[0].words;
+            let words = [];
+            const wordAmount = 50
+            // const wordAmount = 50;
+            for(let i = 0; i <= wordAmount; i++){
+                const randomIndex = Math.floor(Math.random() * wordSet.length);
+                words.push(wordSet[randomIndex]);
+            }
             return words.map(word => ({state:'default', word: word}));
         },
         getWordByIndex(index){
-            return this.getWords()[index];
+            return this.words[index].word;
         },
         handleKeyPress(){
             
@@ -46,10 +48,10 @@ export default {
                 let currentWord = this.getWordByIndex(this.currentWordIndex);
                 // Check if word is true
                 if(currentWord === this.userInput.split(' ')[0]){
-                    this.words.find(word => word.word === currentWord).state = "correct";
+                    this.words[this.currentWordIndex].state = "correct";
                 }
                 else{
-                    this.words.find(word => word.word === currentWord).state = "wrong";
+                    this.words[this.currentWordIndex].state = "wrong"
                 }
 
                 // reset user input
@@ -59,7 +61,7 @@ export default {
                 this.currentWordIndex ++;
 
                 // inkrement currentword
-                this.currentWord = this.getWordByIndex(this.currentWordIndex);
+                // this.currentWord = this.getWordByIndex(this.currentWordIndex);
             }
         }
     },
