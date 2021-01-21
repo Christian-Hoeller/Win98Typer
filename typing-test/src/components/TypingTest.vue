@@ -22,7 +22,7 @@ export default {
     },
     data(){
         return{
-            words: this.getWords(),
+            words: this.getWordsWithClasses(),
             userInput: '',
             currentWordIndex: 0,
             currentWord: this.getWords()[0],
@@ -31,6 +31,10 @@ export default {
     methods: {
         getWords(){
             return json[0].words;
+        },
+        getWordsWithClasses(){
+            const words = this.getWords();
+            return words.map(word => ({state:'default', word: word}));
         },
         getWordByIndex(index){
             return this.getWords()[index];
@@ -42,10 +46,10 @@ export default {
                 let currentWord = this.getWordByIndex(this.currentWordIndex);
                 // Check if word is true
                 if(currentWord === this.userInput.split(' ')[0]){
-                    console.log("word is correct");
+                    this.words.find(word => word.word === currentWord).state = "correct";
                 }
                 else{
-                    console.log("word is wrong")
+                    this.words.find(word => word.word === currentWord).state = "wrong";
                 }
 
                 // reset user input
