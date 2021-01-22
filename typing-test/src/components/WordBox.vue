@@ -36,6 +36,10 @@ export default {
     color:text;
 }
 
+.current{
+    color:indigo;
+}
+
 .box{
  --gap: 12px;
   display: inline-flex;

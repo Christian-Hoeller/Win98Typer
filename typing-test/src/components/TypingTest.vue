@@ -30,13 +30,15 @@ export default {
         getWordsWithClasses(){
             const wordSet = json[0].words;
             let words = [];
-            const wordAmount = 50
+            const wordAmount = 25
             // const wordAmount = 50;
             for(let i = 0; i <= wordAmount; i++){
                 const randomIndex = Math.floor(Math.random() * wordSet.length);
                 words.push(wordSet[randomIndex]);
             }
-            return words.map(word => ({state:'default', word: word}));
+            words = words.map(word => ({state:'default', word: word}));
+            words[0].state = 'current';
+            return words;
         },
         getWordByIndex(index){
             return this.words[index].word;
@@ -57,11 +59,12 @@ export default {
                 // reset user input
                 this.userInput = '';
 
-                // inkrement currentWordIndex
-                this.currentWordIndex ++;
+                // check if last word
+                if(this.currentWordIndex !== this.words.length - 1){
+                    this.currentWordIndex ++;
+                    this.words[this.currentWordIndex].state = "current"
 
-                // inkrement currentword
-                // this.currentWord = this.getWordByIndex(this.currentWordIndex);
+                }
             }
         }
     },
