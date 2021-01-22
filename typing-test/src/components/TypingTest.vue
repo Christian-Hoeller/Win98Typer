@@ -44,10 +44,10 @@ export default {
             return this.words[index].word;
         },
         handleKeyPress(){
+            let currentWord = this.getWordByIndex(this.currentWordIndex);
             
             if(this.userInput[this.userInput.length - 1] === ' '){
                 
-                let currentWord = this.getWordByIndex(this.currentWordIndex);
                 // Check if word is true
                 if(currentWord === this.userInput.split(' ')[0]){
                     this.words[this.currentWordIndex].state = "correct";
@@ -63,6 +63,16 @@ export default {
                 if(this.currentWordIndex !== this.words.length - 1){
                     this.currentWordIndex ++;
                     this.words[this.currentWordIndex].state = "current"
+
+                }
+            }
+            else{
+                if(currentWord.startsWith(this.userInput)){
+                    this.words[this.currentWordIndex].state = "default"
+
+                }
+                else{
+                    this.words[this.currentWordIndex].state = "wrong"
 
                 }
             }
