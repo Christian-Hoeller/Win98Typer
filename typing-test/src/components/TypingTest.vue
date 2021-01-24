@@ -1,13 +1,29 @@
 <template>
 
-<div>
-    <WordBox v-bind:words="words" />
-    <div>
-        <input type="text" @input="handleKeyPress" v-model="userInput">
-        <p>word index: {{wordIndex}}</p>
+<div class="flex justify-center items-center w-screen h-screen">
+
+<div class="window w-1/2" >
+  <div class="title-bar">
+    <div class="title-bar-text">A Window With Stuff In It</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Maximize"></button>
+      <button aria-label="Close"></button>
     </div>
+  </div>
+  <div class="window-body">
+    <WordBox v-bind:words="words" />
+    <div class="flex">
+     <input type="text" @input="handleKeyPress" v-model="userInput" class="input">
+    <button @click="reset" class="reset">Restart</button>
+    </div>
+    <p>word index: {{wordIndex}}</p>
+  </div>
 </div>
 
+
+
+</div>
 </template>
 
 <script>
@@ -63,12 +79,12 @@ export default {
                 if(this.currentWordIndex !== this.words.length - 1){
                     this.currentWordIndex ++;
                     this.words[this.currentWordIndex].state = "current"
-
+                    
                 }
             }
             else{
                 if(currentWord.startsWith(this.userInput)){
-                    this.words[this.currentWordIndex].state = "default"
+                    this.words[this.currentWordIndex].state = "current"
 
                 }
                 else{
@@ -76,6 +92,12 @@ export default {
 
                 }
             }
+        },
+        reset(){
+            this.words = this.getWordsWithClasses();
+            this.currentWordIndex = 0;
+            this.userInput = '';
+
         }
     },
     computed:{
@@ -85,3 +107,18 @@ export default {
     }
 }
 </script>
+
+<style >
+
+    /* .input{
+        width: 70%;
+        font-size: large;
+    }
+
+    .reset{
+        margin-left: 10px;
+        width: 20%;
+    } */
+
+  
+</style>

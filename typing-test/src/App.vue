@@ -1,7 +1,10 @@
 <template>
   <div id="app">
+    <div class="background"></div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <TypingTest />
+
+
   </div>
 </template>
 
@@ -25,6 +28,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+*{
+  padding: 0px;
+  margin:0px
+}
+
+  .background{
+     background-color: #008080;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    }
 </style>

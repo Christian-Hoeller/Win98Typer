@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <div class="box">
-            <span v-for="(word, index) in words" :key="index" :class="word.state">{{word.word}}</span>
-        </div>
+    <div class="box">
+        <span v-for="(word, index) in words" :key="index" :class="word.state">{{word.word}}</span>
     </div>
 </template>
 
@@ -24,6 +22,11 @@ export default {
 
 <style>
 
+.center {
+  margin: auto;
+  padding: 10px;
+}
+
 .correct{
     color: gray;
 }
@@ -37,10 +40,11 @@ export default {
 }
 
 .current{
-    color:indigo;
+    color:darkblue;
 }
 
 .box{
+    font-size: large;
  --gap: 12px;
   display: inline-flex;
   flex-wrap: wrap;
